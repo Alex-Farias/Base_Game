@@ -8,18 +8,28 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+import com.zoltar.graphycs.Spritesheet;
 import com.zoltar.engine_settings.MainFrame;
 import com.zoltar.engine_settings.MainRender;
 import com.zoltar.engine_settings.RenderStructure;
 
 public class Game extends JPanel implements RenderStructure, Runnable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int WIDTH = 240, HEIGHT = 160, SCALE = 3;
 	
 	private Thread thread;
 	private Graphics g;
 	private BufferedImage image;
 	
+	public static Spritesheet spritesheet;
+	
 	public Game() {
+		spritesheet = new Spritesheet("/spritesheet.png");
+		
 		MainFrame frame = new MainFrame();
 		
 		this.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
