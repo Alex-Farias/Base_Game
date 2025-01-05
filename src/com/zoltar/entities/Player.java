@@ -19,10 +19,25 @@ public class Player extends Entity implements RenderStructure{
 			this.setSkinByIndex(i, sprite.getSprite(32 + (i * 16), 0, 16, 16));
 		}
 	}
+	
+	public void walk() {
+		if(this.isRight() && !this.isLeft()) {
+			this.setX(this.getX() + this.getStep());
+		}else if(!this.isRight() && this.isLeft()) {
+			this.setX(this.getX() - this.getStep());
+		}
+		
+		if(this.isUp() && !this.isDown()) {
+			this.setY(this.getY() - this.getStep());
+		}else if(!this.isUp() && this.isDown()) {
+			this.setY(this.getY() + this.getStep());
+		}
+	}
 
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
+		this.walk();
 	}
 
 	@Override

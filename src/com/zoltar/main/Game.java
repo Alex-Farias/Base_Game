@@ -4,31 +4,33 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JPanel;
-
 import com.zoltar.entities.Entity;
 import com.zoltar.entities.Player;
+import com.zoltar.engine_settings.ControlBoard;
 import com.zoltar.engine_settings.MainFrame;
-import com.zoltar.engine_settings.MainRender;
 import com.zoltar.graphics.Spritesheet;
 
-public class Game extends Canvas implements Runnable{
+public class Game extends Canvas implements Runnable, KeyListener, MouseListener {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
 	private int WIDTH = 240, HEIGHT = 160, SCALE = 3;
-	private MainRender mainRender = new MainRender();
 	
 	private Thread thread;
 	private Graphics g;
 	private BufferedImage image;
+	private ControlBoard controlBoard;
 	
 	public static Spritesheet spritesheet;
 	public static List<Entity> entities;
@@ -49,6 +51,10 @@ public class Game extends Canvas implements Runnable{
 		frame.frameInit("Example", this);
 		frame.frameAdd(this);
 		frame.frameSetVisible(true);
+		
+		controlBoard = new ControlBoard();
+		addKeyListener(this);
+		addMouseListener(this);
 	}
 	
 	public synchronized void start() {
@@ -123,12 +129,24 @@ public class Game extends Canvas implements Runnable{
 			}
 
 			if (System.currentTimeMillis() - timer >= 1000) {
-				System.out.println("FPS: " + frames);
+				//System.out.println("FPS: " + frames);
 				frames = 0;
 				timer += 1000;
 			}
 		}
 		stop();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	public int getWidth() {
@@ -153,5 +171,42 @@ public class Game extends Canvas implements Runnable{
 	
 	public void setScale(int scale) {
 		this.SCALE = scale;
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		controlBoard.doControl(controlBoard.getMOUSE_RELEASED(), e);
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		controlBoard.doControl(controlBoard.getMOUSE_ENTERED(), e);
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		controlBoard.doControl(controlBoard.getMOUSE_EXITED(), e);
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		controlBoard.doControl(controlBoard.getKEY_TYPED(), e.getKeyCode(), player);
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println(e.getKeyCode());
+		controlBoard.doControl(controlBoard.getKEY_PRESSED(), e.getKeyCode(), player);
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		controlBoard.doControl(controlBoard.getKEY_RELEASED(), e.getKeyCode(), player);
 	}
 }
