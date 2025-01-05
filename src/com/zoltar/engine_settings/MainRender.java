@@ -12,10 +12,17 @@ public class MainRender extends Canvas {
 	private static final long serialVersionUID = 1L;
 
 	public BufferStrategy render(Game game) {
-		BufferStrategy bs; 
-		if(this.getBufferStrategy() == null) {
-			this.createBufferStrategy(3);
+		BufferStrategy buffer = this.getBufferStrategy();
+
+		System.out.println(buffer);
+		if (buffer == null) {
+			this.generateRender(3);
+			buffer = this.getBufferStrategy();
 		}
-		return bs = this.getBufferStrategy();
+		return buffer;
+	}
+	
+	public void generateRender(int i) {
+		this.createBufferStrategy(i);
 	}
 }

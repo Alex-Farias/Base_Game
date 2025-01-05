@@ -1,25 +1,26 @@
 package com.zoltar.entities;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import com.zoltar.engine_settings.RenderStructure;
+import com.zoltar.graphics.Spritesheet;
 
 public class Entity implements RenderStructure{
 	private int index, indexMax;
 	private int frames, framesMax;
 	private int x, y, width, height;
-	private BufferedImage sprite;
+	private Spritesheet sprite;
+	private BufferedImage[] skin;
 	
 	private boolean right, up, left, down;
 	private int step, speed;
 	
 	private int life, lifeMax;
 	
-	
-
 	public Entity(int index, int indexMax, int frames, int framesMax, int x, int y, int width, int height,
-			BufferedImage sprite, boolean right, boolean up, boolean left, boolean down, int step, int speed, int life,
-			int lifeMax) {
+			Spritesheet sprite, boolean right, boolean up, boolean left, boolean down, int step,
+			int speed, int life, int lifeMax) {
 		super();
 		this.index = index;
 		this.indexMax = indexMax;
@@ -90,11 +91,19 @@ public class Entity implements RenderStructure{
 
 
 
-	public BufferedImage getSprite() {
+	public Spritesheet getSprite() {
 		return sprite;
 	}
 
 
+
+	public BufferedImage[] getSkin() {
+		return skin;
+	}
+	
+	public BufferedImage getSkinByIndex(int i) {
+		return skin[i];
+	}
 
 	public boolean isRight() {
 		return right;
@@ -192,11 +201,21 @@ public class Entity implements RenderStructure{
 
 
 
-	public void setSprite(BufferedImage sprite) {
+	public void setSprite(Spritesheet sprite) {
 		this.sprite = sprite;
 	}
 
-
+	public void setSkin(int i, BufferedImage[] skin) {
+		this.skin = skin;
+	}
+	
+	public void setSkinByIndex(int i, BufferedImage skin) {
+		this.skin[i] = skin;
+	}
+	
+	public void setSkinLenght(int i) {
+		this.skin = new BufferedImage[i];
+	}
 
 	public void setRight(boolean right) {
 		this.right = right;
@@ -244,19 +263,15 @@ public class Entity implements RenderStructure{
 		this.lifeMax = lifeMax;
 	}
 
-
-
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
-	public void render() {
+	public void render(Graphics g) {
 		// TODO Auto-generated method stub
-		
+		g.drawImage(skin[this.getIndex()], this.getX(), this.getY(), null);
 	}
-	
-	
 }

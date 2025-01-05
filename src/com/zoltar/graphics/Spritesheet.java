@@ -1,4 +1,4 @@
-package com.zoltar.graphycs;
+package com.zoltar.graphics;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -10,7 +10,7 @@ public class Spritesheet {
 	
 	public Spritesheet(String path) {
 		try {
-			spritesheet = ImageIO.read(getClass().getResource(path));
+			spritesheet = ImageIO.read(getClass().getResource("/example" + path));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

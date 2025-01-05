@@ -1,42 +1,54 @@
 package com.zoltar.main;
 
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
-import com.zoltar.graphycs.Spritesheet;
+import com.zoltar.entities.Entity;
+import com.zoltar.entities.Player;
 import com.zoltar.engine_settings.MainFrame;
 import com.zoltar.engine_settings.MainRender;
-import com.zoltar.engine_settings.RenderStructure;
+import com.zoltar.graphics.Spritesheet;
 
-public class Game extends JPanel implements RenderStructure, Runnable{
+public class Game extends Canvas implements Runnable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
 	private int WIDTH = 240, HEIGHT = 160, SCALE = 3;
+	private MainRender mainRender = new MainRender();
 	
 	private Thread thread;
 	private Graphics g;
 	private BufferedImage image;
 	
 	public static Spritesheet spritesheet;
+	public static List<Entity> entities;
+	public static Player player;
 	
 	public Game() {
-		spritesheet = new Spritesheet("/spritesheet.png");
+		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+		
+		spritesheet = new Spritesheet("/character.png");
+		entities = new ArrayList<Entity>();
+		
+		player = new Player(0, 5, 0, 5, 0, 0, 16, 16, spritesheet, false, false, false, false, 2, 1, 100, 100);
+		
+		entities.add(player);
 		
 		MainFrame frame = new MainFrame();
-		
 		this.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		frame.frameInit("Example", this);
 		frame.frameAdd(this);
 		frame.frameSetVisible(true);
-		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	}
 	
 	public synchronized void start() {
@@ -54,21 +66,31 @@ public class Game extends JPanel implements RenderStructure, Runnable{
 		}
 	}
 
-	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
-		
+		for (int i = 0; i < entities.size(); i++) {
+			Entity e = entities.get(i);
+			e.tick();
+		}
 	}
  
-	@Override
 	public void render() {
 		// TODO Auto-generated method stub
-		MainRender mainRender = new MainRender();
-		BufferStrategy bs = mainRender.render(this);
+		BufferStrategy bs = this.getBufferStrategy();
+		if(bs == null) {
+			this.createBufferStrategy(3);
+			return;
+		}
 		
 		g = image.getGraphics();
 		g.setColor(new Color(0, 0, 0));
 		g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
+		
+		for (int i = 0; i < entities.size(); i++) {
+			Entity e = entities.get(i);
+			e.render(g);
+		}
+		
 		g.dispose();
 		g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
