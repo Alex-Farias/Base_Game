@@ -10,7 +10,7 @@ public class Spritesheet {
 	
 	public Spritesheet(String path) {
 		try {
-			spritesheet = ImageIO.read(getClass().getResource("/example" + path));
+			spritesheet = ImageIO.read(getClass().getResource(path));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -2,7 +2,6 @@ package com.zoltar.main;
 
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -25,32 +24,30 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int WIDTH = 240, HEIGHT = 160, SCALE = 3;
+	private int width = 240, height = 135, scale = 3;
 	
 	private Thread thread;
 	private Graphics g;
 	private BufferedImage image;
 	private ControlBoard controlBoard;
 	
+	public static MainFrame frame;
 	public static Spritesheet spritesheet;
 	public static List<Entity> entities;
 	public static Player player;
 	
 	public Game() {
-		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-		
-		spritesheet = new Spritesheet("/character.png");
+		spritesheet = new Spritesheet("/art_model/player/character.png");
 		entities = new ArrayList<Entity>();
 		
-		player = new Player(0, 5, 0, 5, 0, 0, 16, 16, spritesheet, false, false, false, false, 2, 1, 100, 100);
+		player = new Player(0, 5, 0, 5, 0, 0, 27, 10, spritesheet, false, false, false, false, 2, 5, 100, 100);
 		
 		entities.add(player);
-		
-		MainFrame frame = new MainFrame();
-		this.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-		frame.frameInit("Example", this);
+		frame = new MainFrame(this);
+		frame.frameInit("Example");
 		frame.frameAdd(this);
-		frame.frameSetVisible(true);
+		frame.setFrameSize(frame.getEnums().FULLSCREEN);
+		frame.setFrameVisible(true);
 		
 		controlBoard = new ControlBoard();
 		addKeyListener(this);
@@ -90,7 +87,8 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		
 		g = image.getGraphics();
 		g.setColor(new Color(0, 0, 0));
-		g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
+		//g.fillRect(0, 0, 240 * 1, 135 * 1);
+		g.fillRect(0, 0, this.getWidth() * this.getScale(), this.getHeight() * this.getScale());
 		
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
@@ -99,8 +97,14 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		
 		g.dispose();
 		g = bs.getDrawGraphics();
-		g.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
+		g.drawImage(image, 0, 0, frame.getWidth(), frame.getHeight(), null);
+		//g.drawImage(image, 0, 0, 2560, 1080, null);
 		bs.show();
+	}
+	
+	public void setImage() {
+		image = new BufferedImage(this.getWidth() * this.getScale(), this.getHeight() * this.getScale(), BufferedImage.TYPE_INT_RGB);
+		//image = new BufferedImage(getWidth() * getScale(), getHeight() * getScale(), BufferedImage.TYPE_INT_RGB);
 	}
 	
 	@Override
@@ -136,6 +140,30 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		}
 		stop();
 	}
+	
+	public int getWidth() {
+		return this.width;
+	}
+	
+	public int getHeight() {
+		return this.height; 
+	}
+	
+	public int getScale() {
+		return this.scale;
+	}
+	
+	public void setWidth(int width) {
+		this.width = width;
+	}
+	
+	public void setHeight(int height) {
+		this.height = height; 
+	}
+	
+	public void setScale(int scale) {
+		this.scale = scale;
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -147,30 +175,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-	}
-	
-	public int getWidth() {
-		return this.WIDTH;
-	}
-	
-	public int getHeight() {
-		return this.HEIGHT; 
-	}
-	
-	public int getScale() {
-		return this.SCALE;
-	}
-	
-	public void setWidth(int width) {
-		this.WIDTH = width;
-	}
-	
-	public void setHeight(int height) {
-		this.HEIGHT = height; 
-	}
-	
-	public void setScale(int scale) {
-		this.SCALE = scale;
 	}
 
 	@Override
@@ -200,7 +204,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(e.getKeyCode());
 		controlBoard.doControl(controlBoard.getKEY_PRESSED(), e.getKeyCode(), player);
 	}
 
