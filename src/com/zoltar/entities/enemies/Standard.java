@@ -4,10 +4,10 @@ import java.awt.Graphics;
 
 import com.zoltar.engine_settings.RenderStructure;
 import com.zoltar.entities.Entity;
-import com.zoltar.entities.races.Human;
+import com.zoltar.entities.races.Race;
 import com.zoltar.graphics.Spritesheet;
 
-public class Standard extends Human implements RenderStructure{
+public class Standard extends Race implements RenderStructure{
 
 	public Standard(int index, int indexMax, int frames, int framesMax, int x, int y, int width, int height,
 			Spritesheet sprite, boolean right, boolean up, boolean left, boolean down, int step,

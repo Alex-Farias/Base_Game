@@ -55,8 +55,9 @@ public class MainFrame {
 		        }
 				break;
 			case WINDOW:
-				game.setPreferredSize(new Dimension(game.getWidth() * game.getScale(), game.getHeight() * game.getScale()));
-				frame.pack();
+                this.setWidth(game.getWidth() * game.getScale());
+                this.setHeight(game.getHeight() * game.getScale());
+                frame.setSize(this.getWidth(), this.getHeight());
 				break;
 			default:
 				break;

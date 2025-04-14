@@ -12,11 +12,14 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zoltar.entities.Entity;
-import com.zoltar.entities.Player;
+import com.zoltar.engine_settings.Camera;
 import com.zoltar.engine_settings.ControlBoard;
 import com.zoltar.engine_settings.MainFrame;
+import com.zoltar.engine_settings.physics.Physics;
+import com.zoltar.entities.Entity;
+import com.zoltar.entities.Player;
 import com.zoltar.graphics.Spritesheet;
+import com.zoltar.world.Floor;
 
 public class Game extends Canvas implements Runnable, KeyListener, MouseListener {
 	/**
@@ -24,7 +27,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int width = 240, height = 135, scale = 3;
+	private static int width = 240, height = 135, scale = 3;
 	
 	private Thread thread;
 	private Graphics g;
@@ -32,12 +35,17 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	private ControlBoard controlBoard;
 	
 	public static MainFrame frame;
+	public static Physics physics;
 	public static Spritesheet spritesheet;
+	public static List<Floor> floors;
 	public static List<Entity> entities;
 	public static Player player;
 	
 	public Game() {
 		spritesheet = new Spritesheet("/art_model/player/character.png");
+		
+		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+		floors = new ArrayList<Floor>();
 		entities = new ArrayList<Entity>();
 		
 		player = new Player(0, 5, 0, 5, 0, 0, 27, 10, spritesheet, false, false, false, false, 2, 5, 100, 100);
@@ -46,7 +54,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		frame = new MainFrame(this);
 		frame.frameInit("Example");
 		frame.frameAdd(this);
-		frame.setFrameSize(frame.getEnums().FULLSCREEN);
+		frame.setFrameSize(frame.getEnums().WINDOW);
 		frame.setFrameVisible(true);
 		
 		controlBoard = new ControlBoard();
@@ -57,7 +65,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public synchronized void start() {
 		thread = new Thread(this);
 		thread.start();
-		
 	}
 	
 	public synchronized void stop() {
@@ -70,10 +77,19 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	}
 
 	public void tick() {
+		//physics.gravity(floors, entities);
+		
 		// TODO Auto-generated method stub
+		for (int i = 0; i < floors.size(); i++) {
+			Floor f = floors.get(i);
+			f.tick();
+			//System.out.println(e.getY());
+		}
+		
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
 			e.tick();
+			//System.out.println(e.getY());
 		}
 	}
  
@@ -89,6 +105,13 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		g.setColor(new Color(0, 0, 0));
 		//g.fillRect(0, 0, 240 * 1, 135 * 1);
 		g.fillRect(0, 0, this.getWidth() * this.getScale(), this.getHeight() * this.getScale());
+		
+		Camera.move(player.getX() - (this.getWidth()/2), player.getY() - (this.getHeight()/2));
+		
+		for (int i = 0; i < floors.size(); i++) {
+			Floor f = floors.get(i);
+			f.render(g);
+		}
 		
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);

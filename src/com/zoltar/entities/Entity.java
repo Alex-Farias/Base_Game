@@ -3,6 +3,7 @@ package com.zoltar.entities;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import com.zoltar.engine_settings.Camera;
 import com.zoltar.engine_settings.RenderStructure;
 import com.zoltar.graphics.Spritesheet;
 
@@ -13,6 +14,7 @@ public class Entity implements RenderStructure{
 	private Spritesheet sprite;
 	private BufferedImage[] skin;
 	
+	private boolean onFloor, onFall;
 	private boolean right, up, left, down;
 	private int step, speed;
 	
@@ -40,62 +42,48 @@ public class Entity implements RenderStructure{
 		this.life = life;
 		this.lifeMax = lifeMax;
 	}
-
-
+	
+	public void fall(boolean onFall) {
+		if(onFall){
+			this.setY(this.getY() - (this.getStep() * this.getSpeed()));
+		}
+	}
 
 	public int getIndex() {
 		return index;
 	}
 
-
-
 	public int getIndexMax() {
 		return indexMax;
 	}
-
-
 
 	public int getFrames() {
 		return frames;
 	}
 
-
-
 	public int getFramesMax() {
 		return framesMax;
 	}
-
-
 
 	public int getX() {
 		return x;
 	}
 
-
-
 	public int getY() {
 		return y;
 	}
-
-
 
 	public int getWidth() {
 		return width;
 	}
 
-
-
 	public int getHeight() {
 		return height;
 	}
 
-
-
 	public Spritesheet getSprite() {
 		return sprite;
 	}
-
-
 
 	public BufferedImage[] getSkin() {
 		return skin;
@@ -105,101 +93,77 @@ public class Entity implements RenderStructure{
 		return skin[i];
 	}
 
+	public boolean isOnFloor() {
+		return onFloor;
+	}
+	
+	public boolean isOnFall() {
+		return onFall;
+	}
+
 	public boolean isRight() {
 		return right;
 	}
-
-
 
 	public boolean isUp() {
 		return up;
 	}
 
-
-
 	public boolean isLeft() {
 		return left;
 	}
-
-
 
 	public boolean isDown() {
 		return down;
 	}
 
-
-
 	public int getStep() {
 		return step;
 	}
-
-
 
 	public int getSpeed() {
 		return speed;
 	}
 
-
-
 	public int getLife() {
 		return life;
 	}
-
-
 
 	public int getLifeMax() {
 		return lifeMax;
 	}
 
-
-
 	public void setIndex(int index) {
 		this.index = index;
 	}
-
-
 
 	public void setIndexMax(int indexMax) {
 		this.indexMax = indexMax;
 	}
 
-
-
 	public void setFrames(int frames) {
 		this.frames = frames;
 	}
-
-
 
 	public void setFramesMax(int framesMax) {
 		this.framesMax = framesMax;
 	}
 
-
-
 	public void setX(int x) {
 		this.x = x;
 	}
-
-
 
 	public void setY(int y) {
 		this.y = y;
 	}
 
-
-
 	public void setWidth(int width) {
 		this.width = width;
 	}
 
-
-
 	public void setHeight(int height) {
 		this.height = height;
 	}
-
-
 
 	public void setSprite(Spritesheet sprite) {
 		this.sprite = sprite;
@@ -217,47 +181,41 @@ public class Entity implements RenderStructure{
 		this.skin = new BufferedImage[i];
 	}
 
+	public void setOnFloor(boolean onFloor) {
+		this.onFloor = onFloor;
+	}
+	
+	public void setOnFall(boolean onFall) {
+		this.onFall = onFall;
+	}
+	
 	public void setRight(boolean right) {
 		this.right = right;
 	}
-
-
 
 	public void setUp(boolean up) {
 		this.up = up;
 	}
 
-
-
 	public void setLeft(boolean left) {
 		this.left = left;
 	}
-
-
 
 	public void setDown(boolean down) {
 		this.down = down;
 	}
 
-
-
 	public void setStep(int step) {
 		this.step = step;
 	}
-
-
 
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
 
-
-
 	public void setLife(int life) {
 		this.life = life;
 	}
-
-
 
 	public void setLifeMax(int lifeMax) {
 		this.lifeMax = lifeMax;
@@ -272,6 +230,6 @@ public class Entity implements RenderStructure{
 	@Override
 	public void render(Graphics g) {
 		// TODO Auto-generated method stub
-		g.drawImage(skin[this.getIndex()], this.getX(), this.getY(), null);
+		g.drawImage(skin[this.getIndex()], this.getX() - Camera.getCameraXOffSet(), this.getY() - Camera.getCameraYOffSet(), null);
 	}
 }
