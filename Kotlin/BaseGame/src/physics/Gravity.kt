@@ -1,0 +1,4 @@
+package physics
+
+class Gravity {
+}
