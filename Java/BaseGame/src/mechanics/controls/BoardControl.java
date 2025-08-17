@@ -1,5 +1,6 @@
 package mechanics.controls;
 
+import entities.Entity;
 import entities.player.Player;
 
 import java.awt.event.KeyEvent;
@@ -21,23 +22,23 @@ public class ControlBoard {
 
     }
 
-    public void doControl(String control, int event, Player player) {
+    public void doControl(String control, int event, Entity entity) {
         switch(control) {
             case KEY_TYPED:
                 break;
             case KEY_PRESSED:
                 switch(event) {
                     case KeyEvent.VK_W:
-                        player.setUp(true);
+                        entity.setUp(true);
                         break;
                     case KeyEvent.VK_A:
-                        player.setLeft(true);
+                        entity.setLeft(true);
                         break;
                     case KeyEvent.VK_S:
-                        player.setDown(true);
+                        entity.setDown(true);
                         break;
                     case KeyEvent.VK_D:
-                        player.setRight(true);
+                        entity.setRight(true);
                         break;
                     default:
                         break;
@@ -46,16 +47,16 @@ public class ControlBoard {
             case KEY_RELEASED:
                 switch(event) {
                     case KeyEvent.VK_W:
-                        player.setUp(false);
+                        entity.setUp(false);
                         break;
                     case KeyEvent.VK_A:
-                        player.setLeft(false);
+                        entity.setLeft(false);
                         break;
                     case KeyEvent.VK_S:
-                        player.setDown(false);
+                        entity.setDown(false);
                         break;
                     case KeyEvent.VK_D:
-                        player.setRight(false);
+                        entity.setRight(false);
                         break;
                     default:
                         break;

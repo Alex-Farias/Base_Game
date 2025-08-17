@@ -2,20 +2,20 @@ package mechanics.atribues;
 
 import mechanics.atribues.defenses.Defense;
 
-public class Atribute {
+public class Attribute {
     private int life;
     private int mana;
     private int stamina;
     private Defense defenses;
 
-    public Atribute(int life, int mana, int stamina, Defense defenses) {
+    public Attribute(int life, int mana, int stamina, Defense defenses) {
         this.life = life;
         this.mana = mana;
         this.stamina = stamina;
         this.defenses = defenses;
     }
 
-    public Atribute(){
+    public Attribute(){
         this.life = 1;
         this.mana = 1;
         this.stamina = 1;

@@ -2,23 +2,23 @@ package entities.creatures;
 
 import entities.Entity;
 import graphycs.sprites.SpriteSheet;
-import mechanics.atribues.Atribute;
+import mechanics.atribues.Attribute;
 
 public class Creature extends Entity {
     protected int step, sprint;
     protected boolean right, up, left, down;
-    protected Atribute atributes;
+    protected Attribute atributes;
 
-    public Creature(int maxFrames, int x, int y, int width, int height, SpriteSheet sprite, int step, int sprint, Atribute atributes) {
+    public Creature(int maxFrames, int x, int y, int width, int height, SpriteSheet sprite, int step, int sprint, Attribute attributes) {
         super(maxFrames, x, y, width, height, sprite);
         this.step = step;
         this.sprint = sprint;
-        this.atributes = atributes;
+        this.atributes = attributes;
     }
 
     public Creature(int maxFrames, int x, int y, int width, int height, SpriteSheet sprite, int step, int sprint) {
         super(maxFrames, x, y, width, height, sprite);
-        this.atributes = new Atribute();
+        this.atributes = new Attribute();
     }
 
     public int getStep() {
@@ -29,7 +29,7 @@ public class Creature extends Entity {
         return sprint;
     }
 
-    public Atribute getAtributes() {
+    public Attribute getAtributes() {
         return atributes;
     }
 
@@ -41,7 +41,7 @@ public class Creature extends Entity {
         this.sprint = sprint;
     }
 
-    public void setAtributes(Atribute atributes) {
+    public void setAtributes(Attribute atributes) {
         this.atributes = atributes;
     }
 }

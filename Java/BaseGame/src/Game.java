@@ -1,3 +1,10 @@
+import entities.Entity;
+import entities.player.Player;
+import graphycs.frames.MainFrame;
+import graphycs.sprites.SpriteSheet;
+import mechanics.controls.ControlBoard;
+import repositories.Config;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -12,16 +19,18 @@ import java.util.List;
 
 public class Game extends Canvas implements Runnable, KeyListener, MouseListener {
     private static final long serialVersionUID = 1L;
-    public static MainFrame frame;
-    public static Spritesheet spritesheet;
-    public static List<Entity> entities;
-    public static Player player;
+    private static final Config cfg = new Config();
+    private static final ControlBoard controlBoard = new ControlBoard();
 
     private int width = 240, height = 135, scale = 3;
     private Thread thread;
     private Graphics g;
     private BufferedImage image;
-    private ControlBoard controlBoard;
+
+    private static MainFrame frame;
+    private static SpriteSheet sprites;
+    private static List<Entity> entities;
+    private static Player player;
 
     public static void main(String[] args){
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
@@ -30,19 +39,18 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
     }
 
     public Game() {
-        spritesheet = new Spritesheet("/art_model/player/character.png");
+        sprites = new SpriteSheet("/art_model/player/character.png");
         entities = new ArrayList<Entity>();
 
-        player = new Player(0, 5, 0, 5, 0, 0, 27, 10, spritesheet, false, false, false, false, 2, 5, 100, 100);
+        //player = new Player(0, 5, 0, 5, 0, 0, 27, 10, spritesheet, false, false, false, false, 2, 5, 100, 100);
 
         entities.add(player);
-        frame = new MainFrame(this);
-        frame.frameInit("Example");
-        frame.frameAdd(this);
-        frame.setFrameSize(frame.getEnums().FULLSCREEN);
-        frame.setFrameVisible(true);
+        frame = new MainFrame();
+        frame.start(cfg);
+        frame.add(this);
+        frame.setSize(frame.getEnums().FULLSCREEN);
+        frame.setVisible(true);
 
-        controlBoard = new ControlBoard();
         addKeyListener(this);
         addMouseListener(this);
     }
