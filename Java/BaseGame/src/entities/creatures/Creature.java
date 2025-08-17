@@ -6,19 +6,19 @@ import mechanics.atribues.Attribute;
 
 public class Creature extends Entity {
     protected int step, sprint;
-    protected boolean right, up, left, down;
-    protected Attribute atributes;
+    protected boolean isRight, isUp, isLeft, isDown;
+    protected Attribute attributes;
 
     public Creature(int maxFrames, int x, int y, int width, int height, SpriteSheet sprite, int step, int sprint, Attribute attributes) {
         super(maxFrames, x, y, width, height, sprite);
         this.step = step;
         this.sprint = sprint;
-        this.atributes = attributes;
+        this.attributes = attributes;
     }
 
     public Creature(int maxFrames, int x, int y, int width, int height, SpriteSheet sprite, int step, int sprint) {
         super(maxFrames, x, y, width, height, sprite);
-        this.atributes = new Attribute();
+        this.attributes = new Attribute();
     }
 
     public int getStep() {
@@ -29,8 +29,24 @@ public class Creature extends Entity {
         return sprint;
     }
 
-    public Attribute getAtributes() {
-        return atributes;
+    public boolean isRight() {
+        return isRight;
+    }
+
+    public boolean isUp() {
+        return isUp;
+    }
+
+    public boolean isLeft() {
+        return isLeft;
+    }
+
+    public boolean isDown() {
+        return isDown;
+    }
+
+    public Attribute getAttributes() {
+        return attributes;
     }
 
     public void setStep(int step) {
@@ -41,7 +57,23 @@ public class Creature extends Entity {
         this.sprint = sprint;
     }
 
-    public void setAtributes(Attribute atributes) {
-        this.atributes = atributes;
+    public void setRight(boolean isRight) {
+        this.isRight = isRight;
+    }
+
+    public void setUp(boolean isUp) {
+        this.isUp = isUp;
+    }
+
+    public void setLeft(boolean isLeft) {
+        this.isLeft = isLeft;
+    }
+
+    public void setDown(boolean isDown) {
+        this.isDown = isDown;
+    }
+
+    public void setAttributes(Attribute attributes) {
+        this.attributes = attributes;
     }
 }

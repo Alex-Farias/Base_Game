@@ -1,6 +1,7 @@
 import entities.Entity;
 import entities.player.Player;
 import graphycs.frames.MainFrame;
+import graphycs.frames.enums.MainFrameEnum;
 import graphycs.sprites.SpriteSheet;
 import mechanics.controls.ControlBoard;
 import repositories.Config;
@@ -19,10 +20,10 @@ import java.util.List;
 
 public class Game extends Canvas implements Runnable, KeyListener, MouseListener {
     private static final long serialVersionUID = 1L;
-    private static final Config cfg = new Config();
     private static final ControlBoard controlBoard = new ControlBoard();
 
     private int width = 240, height = 135, scale = 3;
+    private Boolean isRunning;
     private Thread thread;
     private Graphics g;
     private BufferedImage image;
@@ -46,9 +47,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
         entities.add(player);
         frame = new MainFrame();
-        frame.start(cfg);
+        frame.start(Config.getProperty("game.name"));
         frame.add(this);
-        frame.setSize(frame.getEnums().FULLSCREEN);
+        frame.setSize(MainFrameEnum.FULLSCREEN);
         frame.setVisible(true);
 
         addKeyListener(this);
@@ -87,9 +88,8 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
         //g.fillRect(0, 0, 240 * 1, 135 * 1);
         g.fillRect(0, 0, this.getWidth() * this.getScale(), this.getHeight() * this.getScale());
 
-        for (int i = 0; i < entities.size(); i++) {
-            Entity e = entities.get(i);
-            e.render(g);
+        for (Entity entity : entities) {
+            entity.render(g);
         }
 
         g.dispose();
@@ -106,8 +106,8 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
     @Override
     public void run() {
-        boolean temp = true;
-        int frames = 0;
+        isRunning = true;
+        //int frames = 0;
         long lastTime = System.nanoTime();
         double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
@@ -115,7 +115,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
         double timer = System.currentTimeMillis();
 
         requestFocus();
-        while (temp == true) {
+        while (isRunning == true) {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;
@@ -123,12 +123,12 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
             if (delta >= 1) {
                 tick();
                 render();
-                frames++;
+                //frames++;
                 delta--;
             }
 
             if (System.currentTimeMillis() - timer >= 1000) {
-                frames = 0;
+                //frames = 0;
                 timer += 1000;
             }
         }

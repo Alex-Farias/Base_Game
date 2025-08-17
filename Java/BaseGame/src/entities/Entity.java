@@ -1,10 +1,12 @@
 package entities;
 
+import graphycs.runnable.Runnable;
 import graphycs.sprites.SpriteSheet;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Entity {
+public class Entity implements Runnable {
     protected int maxFrames;
     protected int x, y, width, height;
     protected SpriteSheet sprite;
@@ -73,5 +75,15 @@ public class Entity {
 
     public void setSkin(BufferedImage[] skin) {
         this.skin = skin;
+    }
+
+    @Override
+    public void tick() {
+
+    }
+
+    @Override
+    public void render(Graphics g) {
+
     }
 }

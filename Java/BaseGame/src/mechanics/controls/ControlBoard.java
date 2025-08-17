@@ -1,6 +1,7 @@
 package mechanics.controls;
 
 import entities.Entity;
+import entities.creatures.Creature;
 import entities.player.Player;
 
 import java.awt.event.KeyEvent;
@@ -22,23 +23,23 @@ public class ControlBoard {
 
     }
 
-    public void doControl(String control, int event, Entity entity) {
+    public void doControl(String control, int event, Creature creature) {
         switch(control) {
             case KEY_TYPED:
                 break;
             case KEY_PRESSED:
                 switch(event) {
                     case KeyEvent.VK_W:
-                        entity.setUp(true);
+                        creature.setUp(true);
                         break;
                     case KeyEvent.VK_A:
-                        entity.setLeft(true);
+                        creature.setLeft(true);
                         break;
                     case KeyEvent.VK_S:
-                        entity.setDown(true);
+                        creature.setDown(true);
                         break;
                     case KeyEvent.VK_D:
-                        entity.setRight(true);
+                        creature.setRight(true);
                         break;
                     default:
                         break;
@@ -47,16 +48,16 @@ public class ControlBoard {
             case KEY_RELEASED:
                 switch(event) {
                     case KeyEvent.VK_W:
-                        entity.setUp(false);
+                        creature.setUp(false);
                         break;
                     case KeyEvent.VK_A:
-                        entity.setLeft(false);
+                        creature.setLeft(false);
                         break;
                     case KeyEvent.VK_S:
-                        entity.setDown(false);
+                        creature.setDown(false);
                         break;
                     case KeyEvent.VK_D:
-                        entity.setRight(false);
+                        creature.setRight(false);
                         break;
                     default:
                         break;
