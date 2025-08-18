@@ -23,7 +23,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
     private static final ControlBoard controlBoard = new ControlBoard();
 
     private int width = 240, height = 135, scale = 3;
-    private Boolean isRunning;
+    private boolean isRunning;
     private Thread thread;
     private Graphics g;
     private BufferedImage image;

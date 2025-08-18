@@ -1,25 +1,14 @@
-package mechanics.atribues;
+package mechanics.attributes.bars;
 
-import mechanics.atribues.defenses.Defense;
-
-public class Attribute {
+public class StatusBar {
     private int life;
     private int mana;
     private int stamina;
-    private Defense defenses;
 
-    public Attribute(int life, int mana, int stamina, Defense defenses) {
+    public StatusBar(int life, int mana, int stamina) {
         this.life = life;
         this.mana = mana;
         this.stamina = stamina;
-        this.defenses = defenses;
-    }
-
-    public Attribute(){
-        this.life = 1;
-        this.mana = 1;
-        this.stamina = 1;
-        this.defenses = new Defense(0,0,0,0,0);
     }
 
     public int getLife() {
@@ -34,10 +23,6 @@ public class Attribute {
         return stamina;
     }
 
-    public Defense getDefenses() {
-        return defenses;
-    }
-
     public void setLife(int life) {
         this.life = life;
     }
@@ -48,9 +33,5 @@ public class Attribute {
 
     public void setStamina(int stamina) {
         this.stamina = stamina;
-    }
-
-    public void setDefenses(Defense defenses) {
-        this.defenses = defenses;
     }
 }

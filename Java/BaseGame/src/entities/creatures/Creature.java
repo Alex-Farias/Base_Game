@@ -2,31 +2,20 @@ package entities.creatures;
 
 import entities.Entity;
 import graphycs.sprites.SpriteSheet;
-import mechanics.atribues.Attribute;
+import mechanics.attributes.Attribute;
 
 public class Creature extends Entity {
-    protected int step, sprint;
     protected boolean isRight, isUp, isLeft, isDown;
     protected Attribute attributes;
 
-    public Creature(int maxFrames, int x, int y, int width, int height, SpriteSheet sprite, int step, int sprint, Attribute attributes) {
+    public Creature(int maxFrames, int x, int y, int width, int height, SpriteSheet sprite, Attribute attributes) {
         super(maxFrames, x, y, width, height, sprite);
-        this.step = step;
-        this.sprint = sprint;
         this.attributes = attributes;
     }
 
-    public Creature(int maxFrames, int x, int y, int width, int height, SpriteSheet sprite, int step, int sprint) {
+    public Creature(int maxFrames, int x, int y, int width, int height, SpriteSheet sprite) {
         super(maxFrames, x, y, width, height, sprite);
         this.attributes = new Attribute();
-    }
-
-    public int getStep() {
-        return step;
-    }
-
-    public int getSprint() {
-        return sprint;
     }
 
     public boolean isRight() {
@@ -47,14 +36,6 @@ public class Creature extends Entity {
 
     public Attribute getAttributes() {
         return attributes;
-    }
-
-    public void setStep(int step) {
-        this.step = step;
-    }
-
-    public void setSprint(int sprint) {
-        this.sprint = sprint;
     }
 
     public void setRight(boolean isRight) {
