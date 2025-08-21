@@ -1,44 +1,31 @@
 package entities;
 
 import graphycs.runnable.Runnable;
-import graphycs.sprites.SpriteSheet;
+import mechanics.entities.dimensions.Dimension;
+import mechanics.entities.positions.Position;
+import mechanics.entities.sprites.SpriteSheet;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Entity implements Runnable {
-    protected int maxFrames;
-    protected int x, y, width, height;
-    protected SpriteSheet sprite;
-    protected BufferedImage[] skin;
+    private Position position;
+    private Dimension dimension;
+    private SpriteSheet sprite;
+    private BufferedImage[] skin;
 
-    public Entity(int maxFrames, int x, int y, int width, int height, SpriteSheet sprite) {
-        this.maxFrames = maxFrames;
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+    public Entity(Position position, Dimension dimension, SpriteSheet sprite) {
+        this.position = position;
+        this.dimension = dimension;
         this.sprite = sprite;
     }
 
-    public int getMaxFrames() {
-        return maxFrames;
+    public Position getPosition() {
+        return position;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
+    public Dimension getDimension() {
+        return dimension;
     }
 
     public SpriteSheet getSprite() {
@@ -49,24 +36,12 @@ public class Entity implements Runnable {
         return skin;
     }
 
-    public void setMaxFrames(int maxFrames) {
-        this.maxFrames = maxFrames;
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
+    public void setDimension(Dimension dimension) {
+        this.dimension = dimension;
     }
 
     public void setSprite(SpriteSheet sprite) {

@@ -1,11 +1,11 @@
-package mechanics.attributes;
+package mechanics.entities.creatures.attributes;
 
-import mechanics.attributes.bars.StatusBar;
-import mechanics.attributes.defenses.Defense;
-import mechanics.attributes.mentals.Mental;
-import mechanics.attributes.physicals.Physical;
-import mechanics.attributes.physicals.speeds.Speed;
-import mechanics.attributes.socials.Socials;
+import mechanics.entities.creatures.attributes.bars.StatusBar;
+import mechanics.entities.creatures.attributes.defenses.Defense;
+import mechanics.entities.creatures.attributes.mentals.Mental;
+import mechanics.entities.creatures.attributes.physicals.Physical;
+import mechanics.entities.creatures.attributes.physicals.speeds.Speed;
+import mechanics.entities.creatures.attributes.socials.Socials;
 
 public class Attribute {
     private StatusBar bars;

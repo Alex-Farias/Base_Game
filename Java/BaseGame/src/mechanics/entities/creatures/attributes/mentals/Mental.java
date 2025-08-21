@@ -1,4 +1,4 @@
-package mechanics.attributes.mentals;
+package mechanics.entities.creatures.attributes.mentals;
 
 public class Mental {
     private int intelligence;

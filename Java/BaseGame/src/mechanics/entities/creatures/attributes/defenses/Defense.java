@@ -1,4 +1,4 @@
-package mechanics.attributes.defenses;
+package mechanics.entities.creatures.attributes.defenses;
 
 public class Defense {
     private int armor, magic, fire, ice, lightning, freeze, blood, poison, holy, madness, sleep, rot, death;

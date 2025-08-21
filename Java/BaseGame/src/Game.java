@@ -1,8 +1,8 @@
 import entities.Entity;
-import entities.player.Player;
+import entities.players.Player;
 import graphycs.frames.MainFrame;
 import graphycs.frames.enums.MainFrameEnum;
-import graphycs.sprites.SpriteSheet;
+import mechanics.entities.sprites.SpriteSheet;
 import mechanics.controls.ControlBoard;
 import repositories.Config;
 

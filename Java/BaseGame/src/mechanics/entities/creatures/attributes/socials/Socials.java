@@ -1,4 +1,4 @@
-package mechanics.attributes.socials;
+package mechanics.entities.creatures.attributes.socials;
 
 public class Socials {
     private int charisma;

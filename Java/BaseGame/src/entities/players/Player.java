@@ -1,8 +1,8 @@
-package entities.player;
+package entities.players;
 
 import entities.creatures.Creature;
-import graphycs.sprites.SpriteSheet;
-import mechanics.attributes.Attribute;
+import mechanics.entities.sprites.SpriteSheet;
+import mechanics.entities.creatures.attributes.Attribute;
 
 public class Player extends Creature {
     public Player(int maxFrames, int x, int y, int width, int height, SpriteSheet sprite, Attribute attributes) {

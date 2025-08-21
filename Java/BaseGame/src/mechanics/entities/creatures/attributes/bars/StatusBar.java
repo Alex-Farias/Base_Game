@@ -1,4 +1,4 @@
-package mechanics.attributes.bars;
+package mechanics.entities.creatures.attributes.bars;
 
 public class StatusBar {
     private int life;

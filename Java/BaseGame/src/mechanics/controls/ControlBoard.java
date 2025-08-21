@@ -1,8 +1,7 @@
 package mechanics.controls;
 
-import entities.Entity;
 import entities.creatures.Creature;
-import entities.player.Player;
+import entities.players.Player;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -30,16 +29,16 @@ public class ControlBoard {
             case KEY_PRESSED:
                 switch(event) {
                     case KeyEvent.VK_W:
-                        creature.setUp(true);
+                        creature.getDirection().setUp(true);
                         break;
                     case KeyEvent.VK_A:
-                        creature.setLeft(true);
+                        creature.getDirection().setLeft(true);
                         break;
                     case KeyEvent.VK_S:
-                        creature.setDown(true);
+                        creature.getDirection().setDown(true);
                         break;
                     case KeyEvent.VK_D:
-                        creature.setRight(true);
+                        creature.getDirection().setRight(true);
                         break;
                     default:
                         break;
@@ -48,16 +47,16 @@ public class ControlBoard {
             case KEY_RELEASED:
                 switch(event) {
                     case KeyEvent.VK_W:
-                        creature.setUp(false);
+                        creature.getDirection().setUp(false);
                         break;
                     case KeyEvent.VK_A:
-                        creature.setLeft(false);
+                        creature.getDirection().setLeft(false);
                         break;
                     case KeyEvent.VK_S:
-                        creature.setDown(false);
+                        creature.getDirection().setDown(false);
                         break;
                     case KeyEvent.VK_D:
-                        creature.setRight(false);
+                        creature.getDirection().setRight(false);
                         break;
                     default:
                         break;

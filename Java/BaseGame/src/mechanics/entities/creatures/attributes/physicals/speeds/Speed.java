@@ -1,4 +1,4 @@
-package mechanics.attributes.physicals.speeds;
+package mechanics.entities.creatures.attributes.physicals.speeds;
 
 public class Speed {
     private int step;

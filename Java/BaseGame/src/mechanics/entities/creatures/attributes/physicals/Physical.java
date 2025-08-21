@@ -1,6 +1,6 @@
-package mechanics.attributes.physicals;
+package mechanics.entities.creatures.attributes.physicals;
 
-import mechanics.attributes.physicals.speeds.Speed;
+import mechanics.entities.creatures.attributes.physicals.speeds.Speed;
 
 public class Physical {
     private int vigor;
